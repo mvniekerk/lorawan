@@ -11,6 +11,7 @@ use crate::lorawan::{Settings, NEXT_DELAY};
 pub use crate::radio::rate::*;
 pub use crate::radio::region::*;
 
+mod eirp;
 mod rate;
 mod region;
 
@@ -223,6 +224,7 @@ pub enum RadioError<ERR> {
     Random(rand_core::Error),
     UnsupportedDataRate,
     Timeout,
+    UnsupportedTxPower,
 }
 
 impl<ERR> From<ERR> for RadioError<ERR> {

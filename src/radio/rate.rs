@@ -10,14 +10,20 @@ pub type Hz = u32;
 pub struct DataRate<R> {
     spreading_factor: SpreadingFactor,
     frequency: Hz,
+    max_payload_size: u8,
     _region: PhantomData<R>,
 }
 
 impl<R> DataRate<R> {
-    pub(in crate::radio) const fn new(spreading_factor: SpreadingFactor, frequency: Hz) -> Self {
+    pub(in crate::radio) const fn new(
+        spreading_factor: SpreadingFactor,
+        frequency: Hz,
+        max_payload_size: u8,
+    ) -> Self {
         DataRate {
             spreading_factor,
             frequency,
+            max_payload_size,
             _region: PhantomData,
         }
     }
@@ -57,6 +63,7 @@ impl<R> Clone for DataRate<R> {
         DataRate {
             spreading_factor: self.spreading_factor,
             frequency: self.frequency,
+            max_payload_size: self.max_payload_size,
             _region: PhantomData,
         }
     }
